@@ -1,0 +1,14 @@
+body {
+	background-color: #fefbf7;
+}
+
+.col-sm-3 {
+	vertical-align: bottom;
+}
+
+.jumbotron {
+	background-image: url("http://i.imgur.com/eDO76Fi.jpg");
+	background-size: 100%;
+	vertical-align: center;
+	color: white;
+}
