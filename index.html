@@ -34,7 +34,7 @@
 				 <h3>Market Details</h3>
 				 <address>
 				   <strong>my market</strong><br>
-				   255 Bush Street<br>
+				   225 Bush Street<br>
 				   San Francisco, CA 94107<br>
 				   <abbr title="Phone">P:</abbr> (123) 456-7890
 				 </address>
@@ -47,12 +47,8 @@
 			</div>
 		</div>
 		<div class="col-md-8">
-			<ul class="list-group">
-			  <li class="list-group-item">Cras justo odio</li>
-			  <li class="list-group-item">Dapibus ac facilisis in</li>
-			  <li class="list-group-item">Morbi leo risus</li>
-			  <li class="list-group-item">Porta ac consectetur ac</li>
-			  <li class="list-group-item">Vestibulum at eros</li>
+			<ul class="list-group" id="results-list">
+			 <!--  results list of markets goes here -->
 			</ul>
 		</div>
 	</div>
@@ -68,8 +64,13 @@
 
 <!-- end of container -->
 </div>
-
-
+	
+	<!-- template for results/map -->
+	<script type="text/template" id="results-template">
+		<li class="list-group-item market">	<%= name %> - <%= location %>
+		<br> 
+		<strong><%= day %></strong> <%= hours %></li>
+	</script>
 
 
 	<!-- jquery cdn -->
@@ -78,7 +79,6 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
 	<!-- customized script -->
 	<script type="text/javascript" src="scripts.js"></script>
 </body>
