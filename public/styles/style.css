@@ -12,3 +12,8 @@ body {
 	vertical-align: center;
 	color: white;
 }
+
+footer {
+	text-align: center;
+	font-style: italic;
+}
