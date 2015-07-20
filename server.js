@@ -6,12 +6,18 @@ var express = require('express'),
 	mongoose.connect("mongodb://localhost/market-finder"),
 	_ = require("underscore");
 
+	mongoose.connect(
+	  process.env.MONGOLAB_URI ||
+	  process.env.MONGOHQ_URL ||
+	  'mongodb://localhost/market-finder' // plug in the db name you've been using
+	);
 
 // serve js and css files from public folder
 app.use(express.static(__dirname + '/public'));
 
 // tell app to use bodyParser middleware
 app.use(bodyParser.urlencoded({extended: true}));
+
 
   var markets = [
     	{_id: "55aae016d0f5a164a679f617", name: "Inner Richmond", address: "Clement St", day: "Sunday", hours: "7am - 2pm", Products: "veggies, meat, eggs, cheese", numVendors: 70}, 
@@ -54,6 +60,4 @@ app.put('/api/markets/:marketId', function (req, res) {
 })
 
 // listen on port 3000
-app.listen(3000, function () {
-  console.log('server started on localhost:3000');
-});
+app.listen(process.env.PORT || 3000);
