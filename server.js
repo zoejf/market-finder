@@ -6,7 +6,7 @@ var express = require('express'),
 	// mongoose.connect("mongodb://localhost/market-finder"),
 	_ = require("underscore");
 
-	mongoose.createConnection(
+	mongoose.connect(
 	  process.env.MONGOLAB_URI ||
 	  process.env.MONGOHQ_URL ||
 	  'mongodb://localhost/market-finder' // plug in the db name you've been using
