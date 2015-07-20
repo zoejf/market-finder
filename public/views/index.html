@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 	<!-- customized styles -->
 		<link rel="stylesheet" type="text/css" href="./styles/style.css">
-
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <div class="jumbotron">
@@ -31,13 +31,20 @@
 		<div class="col-md-4">
 			<div class="panel panel-default info-panel">
 			  <div class="panel-body" >
-			 	<div class="market-details">
 			 		<h5>Welcome!</h5>
 			 		<p>Type in your zip code to find information about the closest farmer's markets near you. </p>
-			 		<!-- 	specific market details go here -->
-			 	</div>
+	 			<form id="search-zip">
+	 				<div class="form-group">
+	 					<!-- <label for="zipcode"></label> -->
+	 					<input input class="form-control" id="zipcode" placeholder="Zip Code (ie. 94118)" autofocus> 
+	 				</div>
+	 				<button type="submit" class="btn btn-success">Go!</button>
+	 			</form>
+
 			  </div>
-			
+			</div>
+			<div class="market-details">
+				<!-- 	specific market details go here -->
 			</div>
 		</div>
 		<div class="col-md-8">
@@ -74,18 +81,22 @@
 
 	<!-- template for market details -->
 	<script type="text/template" id="market-details-template">
-	<div class="market-details" id="details-<%= _id %>" data-id="<%= _id %>">
-		<h3>Market Details</h3>
-		<address>
-		  <h5><%= name %></h5><br>
-		  	<%= address %><br>
-		</address>
+	<div class="panel panel-default info-panel market-details">
+	  <div class="panel-body" >
+		<div id="details-<%= _id %>" data-id="<%= _id %>">
+			<h3>Market Details</h3>
+			<address>
+			  <h5><%= name %></h5><br>
+			  	<%= address %><br>
+			</address>
 
-		<address>
-		  <%= day %> <%= hours %><br>
-		  <strong>Products: </strong> &nbsp<%= Products %><br>
-		  <strong>Number of Vendors: </strong> &nbsp <%= numVendors %>
-		</address>
+			<address>
+			  <%= day %> <%= hours %><br>
+			  <strong>Products: </strong> &nbsp<%= Products %><br>
+			  <strong>Number of Vendors: </strong> &nbsp <%= numVendors %>
+			</address>
+		</div>
+	  </div>
 	</div>
 	</script>
 

@@ -35,7 +35,7 @@ app.get('/api/markets', function (req, res) {
 			console.log("error: ", err);
 			res.status(500).send(err);
 		} else {
-			console.log(markets);
+			// console.log(markets);
 			res.json(markets);
 		}
 		
@@ -45,10 +45,10 @@ app.get('/api/markets', function (req, res) {
 app.put('/api/markets/:marketId', function (req, res) {
 	//set the value of the id from the request
 	var targetId = req.params.marketId;
-	console.log('targetId: ' + targetId);
+	// console.log('targetId: ' + targetId);
 	//find item in markets array matching the id
 	var foundMarket = _.findWhere(markets, {_id: targetId});
-	console.log('foundMarket: ' + foundMarket);
+	// console.log('foundMarket: ' + foundMarket);
 
 	res.json(foundMarket);
 })
