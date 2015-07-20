@@ -21,26 +21,26 @@ $(function() {
     });
 
     //on click of the 'Go' button
-    $('#search-zip').on('submit', function() {
-        
+    $('#search-zip').on('submit', function(event) {
+        event.preventDefault();
+
         var zip = $('#zipcode').val();
         console.log('zipcode: ', zip);
 
         //get all results with that zip code from form
         $.ajax({
-              type: 'GET',
-              contentType: 'application/json; charset=utf-8',
-              // submit a get request to the restful service zipSearch or locSearch
-              url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=" + zip,
-              // or
-              // url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=" + lat + "&lng=" + lng,
-              dataType: 'jsonp',
-              jsonpCallback: 'searchResultsHandler', 
-              success: function() {
-                console.log("success");
-
-              }
-          });
+            type: 'GET', 
+            url: 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=' + zip, 
+            success: function (data) {
+                console.log('data: ', data);
+                //push each of the found results to my temp marketResults array
+                var results = data.results;
+                _.each(results, function(el) {
+                    marketResults.push(el);
+                });
+                console.log(marketResults);
+            }
+        })
 
    
        //iterate through each item in marketResults array
