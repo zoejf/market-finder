@@ -3,7 +3,7 @@ var express = require('express'),
     app = express(),
     bodyParser = require('body-parser')
     mongoose = require("mongoose"),
-	mongoose.connect("mongodb://localhost/market-finder"),
+	// mongoose.connect("mongodb://localhost/market-finder"),
 	_ = require("underscore");
 
 	mongoose.createConnection(
