@@ -10,15 +10,15 @@ $(function() {
     // var marketResults = [];
     
     //results list: render test data to the page
-    $.get('/api/markets', function(data) {
-        var markets = data;
+    // $.get('/api/markets', function(data) {
+    //     var markets = data;
 
         //renders template to the page
-        _.each(markets, function(result) {
-          var $resultItem = $(resultsTemplate(result));
-            $resultsList.append($resultItem);
-        });
-    });
+    //     _.each(markets, function(result) {
+    //       var $resultItem = $(resultsTemplate(result));
+    //         $resultsList.append($resultItem);
+    //     });
+    // });
 
 //DEFINE FUNCTIONS FOR USDA API 
     //get all results with that zip code 
@@ -26,6 +26,7 @@ $(function() {
         $.ajax({
             type: 'GET', 
             url: 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=' + zip, 
+            async: false,
             success: function (data) {
                 // console.log('data: ', data);
                 //push each of the found results to my temp marketResults array
@@ -53,25 +54,29 @@ $(function() {
              var marketResult = marketResults[i];
              console.log('market result: ', marketResult);
              //get details for the item with that id
-             $.ajax({
-                 type: 'GET',
-                 url: 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=' + id,
-                 success: function (data) {
-                    console.log('id data: ', data);
-                    console.log('market result inside success', marketResult);
-                    marketResult.address = data.marketdetails.Address;
-                    marketResult.google = data.marketdetails.GoogleLink;
-                    marketResult.products = data.marketdetails.Products;
-                    marketResult.schedule = data.marketdetails.Schedule;
-                    console.log('marketResults after new keys: ', marketResult);
-                    appendResults(marketResult);  // will work after fixing underscore template
-                 }
-             })
+             if (id) {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=' + id,
+                    async: false,
+                    success: function (data) {
+                       console.log('id data: ', data);
+                       console.log('market result inside success', marketResult);
+                       marketResult.address = data.marketdetails.Address;
+                       marketResult.google = data.marketdetails.GoogleLink;
+                       marketResult.products = data.marketdetails.Products;
+                       marketResult.schedule = data.marketdetails.Schedule;
+                       console.log('marketResults after new keys: ', marketResult);
+                       appendResult(marketResult);  // will work after fixing underscore template
+                    }
+                })
+              }
         };
     };
 
-    var appendResults = function (marketResults) {
-
+    var appendResult = function (marketResult) {
+        var $resultItem = $(resultsTemplate(marketResult));
+          $resultsList.append($resultItem);
     };
 
 // ! end of defining functions
@@ -85,15 +90,8 @@ $(function() {
         console.log('zipcode: ', zip);
 
         //search by specific zip entered in form
+        //inside this function, it searches again by each id and appends to page
         searchZip(zip);
-        // console.log('market results 2: ', marketResults);
-
-        //search by each id from zip results
-        
-
-        //for each item in marketResults array, append data to html page
-
-
 
     });
 

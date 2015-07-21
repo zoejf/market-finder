@@ -66,13 +66,16 @@
 </footer>
 <!-- end of container -->
 </div>
+
+<a href=""></a>
 	
 	<!-- template for results/map -->
 	<script type="text/template" id="results-template">
-		<li class="list-group-item market" id="market-<%= _id %>" data-id="<%= _id %>">	<strong><%= name %></strong> - <%= location %>  &nbsp &nbsp
+		<li class="list-group-item market" id="market-<%= id %>" data-id="<%= id %>">	<strong><%= marketname %></strong>  &nbsp &nbsp
 		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-		<br> 
-		<%= day %> <%= hours %>
+		<br>
+		<p> Schedule: <%= schedule %> </p>
+		<a href="<%= google %>">See it on Google Maps</a> 
 		<br>
 		<br>
 		</li>
@@ -86,15 +89,15 @@
 		<div id="details-<%= _id %>" data-id="<%= _id %>">
 			<h3>Market Details</h3>
 			<address>
-			  <h5><%= name %></h5><br>
-			  	<%= address %><br>
+			  <h5><%= marketname %></h5><br>
+			  	<%= address %>
+			  	<br>
+			  	<p> Schedule: <%= schedule %>
+			  	<br>
+			  	<p> Proucts: <%= products %>
+
 			</address>
 
-			<address>
-			  <%= day %> <%= hours %><br>
-			  <strong>Products: </strong> &nbsp<%= Products %><br>
-			  <strong>Number of Vendors: </strong> &nbsp <%= numVendors %>
-			</address>
 		</div>
 	  </div>
 	</div>
