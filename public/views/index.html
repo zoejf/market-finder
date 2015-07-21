@@ -6,6 +6,9 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<!-- mapbox css styling and js	 -->
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
 	<!-- customized styles -->
 		<link rel="stylesheet" type="text/css" href="./styles/style.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,11 +22,13 @@
 				<p>find a farmer's market anywhere</p>
 			</div>
 			<div class="col-sm-3">
-				<p><a class="btn btn-success btn-sm" href="#" role="button">Register as a Vendor</a></p>
+				<p><a class="btn btn-success btn-sm" href="/signup" type="button">Are You A Vendor?</a></p>
 			</div>
 		</div>
 	</div>
 </div>
+
+
 
 <div class="container">
   <div id="results-section">
@@ -48,10 +53,19 @@
 			</div>
 		</div>
 		<div class="col-md-8">
+			<div id='map'>
+				<!-- map will go here -->
+			</div>	
+		</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<br>
+			<br>
 			<ul class="list-group" id="results-list">
 			 <!--  results list of markets goes here -->
 			</ul>
 		</div>
+	</div>
 	</div>
 
 	
@@ -67,16 +81,23 @@
 <!-- end of container -->
 </div>
 
-<a href=""></a>
-	
-	<!-- template for results/map -->
+
+	<!-- template for map -->
+	<script>
+	// Provide your access token
+	L.mapbox.accessToken = 'pk.eyJ1Ijoiem9lamYiLCJhIjoiYzZkYzk3YTg0NjlhMWMzN2YxMzE3MjRlYjdhYTY2NTcifQ.4o17DQScL_qZlKTOYSXrXQ';
+	// Create a map in the div #map
+	var geocoder = L.mapbox.geocoder('mapbox.places'), 
+		map = L.mapbox.map('map', 'zoejf.d3e46a92');
+
+	</script>
+
+	<!-- template for results -->
 	<script type="text/template" id="results-template">
 		<li class="list-group-item market" id="market-<%= id %>" data-id="<%= id %>">	<strong><%= marketname %></strong>  &nbsp &nbsp
 		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-		<br>
-		<p> Schedule: <%= schedule %> </p>
+		Schedule: <%= schedule %>
 		<a href="<%= google %>">See it on Google Maps</a> 
-		<br>
 		<br>
 		</li>
 		
@@ -86,7 +107,7 @@
 	<script type="text/template" id="market-details-template">
 	<div class="panel panel-default info-panel market-details">
 	  <div class="panel-body" >
-		<div id="details-<%= _id %>" data-id="<%= _id %>">
+		<div id="details-<%= id %>" data-id="<%= id %>">
 			<h3>Market Details</h3>
 			<address>
 			  <h5><%= marketname %></h5><br>

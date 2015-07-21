@@ -1,0 +1,82 @@
+
+<html>
+<head>
+	<title>Sign Up</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<!-- customized styles -->
+		<link rel="stylesheet" type="text/css" href="./styles/style.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<h3>Sign Up</h3>
+				<p>It's free and always will be!</p>
+				<br>
+				<p>Vendors who are registered with To Market can communicate with their customers by posting on a market page. Tell people about your special pricing or seasonal items.<p/>
+				<br>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+		    	<form role="form" method="post" action="/users">
+		<!-- 	    			<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6">
+							<div class="form-group">
+		            <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6">
+							<div class="form-group">
+								<input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+							</div>
+						</div>
+					</div> -->
+
+				<div class="row">
+				  <div class="col-xs-6 col-sm-6 col-md-6 col-xs-offset-3">
+				    <div class="form-group">
+				      <input type="email" name="vendor[email]" id="email" class="form-control input-sm" placeholder="Email Address">
+				    </div>
+				  </div>
+				</div>
+
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-xs-offset-3">
+							<div class="form-group">
+								<input type="password" name="vendor[password]" id="password" class="form-control input-sm" placeholder="Password">
+							</div>
+						</div>
+<!-- 						<div class="col-xs-6 col-sm-6 col-md-6">
+							<div class="form-group">
+								<input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+							</div>
+						</div> -->
+					</div>
+		<!--     		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->    		  
+					  <button type="submit" class="btn btn-success bnt-lg pull-right">Sign Me Up</button>
+					  <br>
+					  <br>
+					  <a href="#" class="pull-right">I'm already a member</a>
+				</form>
+			</div>
+		</div>
+	</div>
+	        
+
+	<!-- jquery cdn -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- underscore cdn -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- customized script -->
+	<script type="text/javascript" src="./scripts/scripts.js"></script>
+	
+</body>
+</html>
+

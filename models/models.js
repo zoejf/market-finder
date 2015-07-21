@@ -8,6 +8,10 @@ var marketSchema = new Schema ({
 	hours: String
 })
 
+// var	vendorSchema = new Schema ({
+// 	name
+// })
+
 var Market = mongoose.model('Market', marketSchema);
 
 module.exports.Market = Market;

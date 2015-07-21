@@ -67,7 +67,7 @@ $(function() {
                        marketResult.products = data.marketdetails.Products;
                        marketResult.schedule = data.marketdetails.Schedule;
                        console.log('marketResults after new keys: ', marketResult);
-                       appendResult(marketResult);  // will work after fixing underscore template
+                       appendResult(marketResult);  
                     }
                 })
               }
@@ -79,6 +79,23 @@ $(function() {
           $resultsList.append($resultItem);
     };
 
+//DEFINE FUNCTIONS FOR MAP API
+
+
+function showMap(err, data) {
+    // The geocoder can return an area, like a city, or a
+    // point, like an address. Here we handle both cases,
+    // by fitting the map bounds to an area or zooming to a point.
+    if (data.lbounds) {
+        map.fitBounds(data.lbounds);
+    } else if (data.latlng) {
+        map.setView([data.latlng[10], data.latlng[20]], 30);
+    }
+}
+
+
+
+
 // ! end of defining functions
 
 
@@ -88,10 +105,18 @@ $(function() {
 
         var zip = $('#zipcode').val();
         console.log('zipcode: ', zip);
+        geocoder.query((zip.toString()), showMap);
 
         //search by specific zip entered in form
         //inside this function, it searches again by each id and appends to page
         searchZip(zip);
+
+        //make map fit to markers
+        featureLayer.on('ready', function() {
+            // featureLayer.getBounds() returns the corners of the furthest-out markers,
+            // and map.fitBounds() makes sure that the map contains these.
+            map.fitBounds(featureLayer.getBounds());
+        });
 
     });
 
@@ -101,7 +126,11 @@ $(function() {
 
             //find the market's id
             var marketId = $(this).closest('.market').attr('data-id');
-            // console.log('marketId: ' + marketId);
+
+            console.log('marketId: ' + marketId);
+
+            // render data to the page for that market
+            $detailsHtml = $(detailsTemplate())
 
             //render data to the page for that market
             $.ajax({
