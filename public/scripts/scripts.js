@@ -25,7 +25,7 @@ $(function() {
     var searchZip = function (zip) {
         $.ajax({
             type: 'GET', 
-            url: 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=' + zip, 
+            url: 'https://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=' + zip, 
             async: false,
             success: function (data) {
                 // console.log('data: ', data);
@@ -57,7 +57,7 @@ $(function() {
              if (id) {
                 $.ajax({
                     type: 'GET',
-                    url: 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=' + id,
+                    url: 'https://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=' + id,
                     async: false,
                     success: function (data) {
                        console.log('id data: ', data);
@@ -112,13 +112,13 @@ function showMap(err, data) {
         searchZip(zip);
 
         //make map fit to markers
-        featureLayer.on('ready', function() {
-            // featureLayer.getBounds() returns the corners of the furthest-out markers,
-            // and map.fitBounds() makes sure that the map contains these.
-            map.fitBounds(featureLayer.getBounds());
-        });
+    //     featureLayer.on('ready', function() {
+    //         // featureLayer.getBounds() returns the corners of the furthest-out markers,
+    //         // and map.fitBounds() makes sure that the map contains these.
+    //         map.fitBounds(featureLayer.getBounds());
+    //     });
 
-    });
+    // });
 
 
     //on click of the info icon, find that market's details
