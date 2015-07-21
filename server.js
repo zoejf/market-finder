@@ -3,7 +3,8 @@ var express = require('express'),
     app = express(),
     bodyParser = require('body-parser')
     mongoose = require("mongoose"),
-	_ = require("underscore");
+	_ = require("underscore"),
+	session = require('express-session');
 
 	mongoose.connect(
 	  process.env.MONGOLAB_URI ||
@@ -16,6 +17,14 @@ app.use(express.static(__dirname + '/public'));
 
 // tell app to use bodyParser middleware
 app.use(bodyParser.urlencoded({extended: true}));
+
+// middleware to set session options
+app.use(session({
+  saveUninitialized: true,
+  resave: true,
+  secret: 'SuperSecretCookie',
+  cookie: { maxAge: 60000 }
+}));
 
 
   var markets = [
@@ -30,6 +39,35 @@ app.use(bodyParser.urlencoded({extended: true}));
 // root route to get to main page
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/public/views/index.html');
+});
+
+//signup route with placeholder response
+app.get('/signup', function (req,res) {
+	res.send('coming soon');
+});
+
+// vendor submits the signup form
+app.post('/vendors', function (req, res) {
+
+  // grab vendor data from params (req.body)
+  var newVendor = req.body.vendor;
+
+  // create new vendor with secure password
+  db.Vendor.createSecure(newVendor.email, newVendor.password, function (err, vendor) {
+    res.send(vendor);
+  });
+});
+
+// vendor submits the login form
+app.post('/login', function (req, res) {
+
+  // grab vendor data from params (req.body)
+  var vendorData = req.body.vendor;
+
+  // call authenticate function to check if password vendor entered is correct
+  db.Vendor.authenticate(vendorData.email, vendorData.password, function (err, vendor) {
+    res.send(vendor);
+  });
 });
 
 //API ROUTES
