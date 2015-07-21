@@ -1,6 +1,11 @@
 body {
 	background-color: #fefbf7;
 }
+.jumbotron h1 {
+	color: white;
+	
+	
+}
 
 .col-sm-3 {
 	vertical-align: bottom;

@@ -53,6 +53,11 @@ VendorSchema.statics.authenticate = function (email, password, callback) {
   });
 };
 
+//when vendor signs in, check if that email address is already taken
+//something similar to .authenticate
+
+
+
 // compare password vendor enters with hashed password (`passwordDigest`)
 VendorSchema.methods.checkPassword = function (password) {
   // run hashing algorithm (with salt) on password vendor enters in order to compare with `passwordDigest`

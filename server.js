@@ -15,16 +15,42 @@ var express = require('express'),
 // serve js and css files from public folder
 app.use(express.static(__dirname + '/public'));
 
-// tell app to use bodyParser middleware
-app.use(bodyParser.urlencoded({extended: true}));
+//MIDDLEWARE
+	// tell app to use bodyParser middleware
+	app.use(bodyParser.urlencoded({extended: true}));
 
-// middleware to set session options
-app.use(session({
-  saveUninitialized: true,
-  resave: true,
-  secret: 'SuperSecretCookie',
-  cookie: { maxAge: 60000 }
-}));
+	// middleware to set session options
+	app.use(session({
+	  saveUninitialized: true,
+	  resave: true,
+	  secret: 'SuperSecretCookie',
+	  cookie: { maxAge: 60000 }
+	}));
+
+	// middleware to manage sessions
+	app.use('/', function (req, res, next) {
+	  // saves vendorId in session for logged-in vendor
+	  req.login = function (vendor) {
+	    req.session.vendorId = vendor.id;
+	  };
+
+	  // finds vendor currently logged in based on `session.vendorId`
+	  req.currentVendor = function (callback) {
+	    db.Vendor.findOne({_id: req.session.vendorId}, function (err, vendor) {
+	      req.vendor = vendor;
+	      callback(null, vendor);
+	    });
+	  };
+
+	  // destroy `session.vendorId` to log out vendor
+	  req.logout = function () {
+	    req.session.vendorId = null;
+	    req.vendor = null;
+	  };
+
+	  next();
+	});
+//end of middleware
 
 
   var markets = [
@@ -43,7 +69,37 @@ app.get('/', function (req, res) {
 
 //signup route with placeholder response
 app.get('/signup', function (req,res) {
-	res.send('coming soon');
+	req.currentVendor(function (err, vendor) {
+		if (vendor) {
+			res.redirect('/profile');
+		} else {
+			res.sendFile(__dirname + '/public/views/signup.html');
+		}
+	});
+});
+
+// login route (renders login view)
+app.get('/login', function (req, res) {
+	req.currentVendor(function (err, vendor) {
+		// finds if the vendor is already logged in
+		if (vendor) {
+			res.redirect('/profile');
+		} else {
+			res.sendFile(__dirname + '/public/views/login.html');
+		}
+	})
+});
+
+// vendor profile page
+app.get('/profile', function (req, res) {
+  // finds vendor currently logged in
+  req.currentVendor(function (err, vendor) {
+  	if (vendor) {
+  		res.sendFile(__dirname + '/public/views/profile.html');
+  	} else {
+  		res.redirect('/login');
+  	}
+  });
 });
 
 // vendor submits the signup form
@@ -54,7 +110,7 @@ app.post('/vendors', function (req, res) {
 
   // create new vendor with secure password
   db.Vendor.createSecure(newVendor.email, newVendor.password, function (err, vendor) {
-    res.send(vendor);
+    res.redirect('/login');
   });
 });
 
@@ -66,8 +122,21 @@ app.post('/login', function (req, res) {
 
   // call authenticate function to check if password vendor entered is correct
   db.Vendor.authenticate(vendorData.email, vendorData.password, function (err, vendor) {
-    res.send(vendor);
+    //saves user id to session
+    req.login(vendor);
+
+    //resdirect to user profile
+    res.redirect('/profile');
   });
+});
+
+//vendor clicks the logout link
+app.get('/logout', function (req, res) {
+
+  //set session.userId and user to null
+  req.logout();
+  //go back to home page
+  res.redirect('/');
 });
 
 //API ROUTES
