@@ -112,13 +112,13 @@ function showMap(err, data) {
         searchZip(zip);
 
         //make map fit to markers
-    //     featureLayer.on('ready', function() {
-    //         // featureLayer.getBounds() returns the corners of the furthest-out markers,
-    //         // and map.fitBounds() makes sure that the map contains these.
-    //         map.fitBounds(featureLayer.getBounds());
-    //     });
+        // featureLayer.on('ready', function() {
+        //     // featureLayer.getBounds() returns the corners of the furthest-out markers,
+        //     // and map.fitBounds() makes sure that the map contains these.
+        //     map.fitBounds(featureLayer.getBounds());
+        // });
 
-    // });
+    });
 
 
     //on click of the info icon, find that market's details
