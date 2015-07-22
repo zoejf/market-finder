@@ -22,7 +22,7 @@ footer {
 }
 
 .col-md-8 {
-	height: 500px;
+	height: 400px;
 }
 
 #map { 
@@ -30,4 +30,6 @@ footer {
 	top:0; 
 	bottom:0; 
 	width:100%; 
+	margin-left: auto;
+	margin-right: auto;
 }

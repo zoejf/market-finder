@@ -58,7 +58,7 @@ app.use(express.static(__dirname + '/public'));
     	{_id: "55aae058d0f5a164a679f618", name: "Ferry Building", address: "Embarcadero", day: "Wednesday", hours: "12pm - 4pm", Products: "veggies, fruit, bread, cheese", numVendors: 30} 
     ];
 
- // connect to models
+ // connect to models instead of User = require('./models/user.js')
  var db = require('./models/models');
 
 //STATIC ROUTES
@@ -108,10 +108,14 @@ app.post('/vendors', function (req, res) {
   // grab vendor data from params (req.body)
   var newVendor = req.body.vendor;
 
-  // create new vendor with secure password
-  db.Vendor.createSecure(newVendor.email, newVendor.password, function (err, vendor) {
-    res.redirect('/login');
-  });
+  //check if email already exists in db
+
+  	   //if email already exists, throw error
+
+	  // else, create new vendor with secure password
+	  db.Vendor.createSecure(newVendor.email, newVendor.password, function (err, vendor) {
+	    res.redirect('/login');
+	  });
 });
 
 // vendor submits the login form
@@ -122,11 +126,16 @@ app.post('/login', function (req, res) {
 
   // call authenticate function to check if password vendor entered is correct
   db.Vendor.authenticate(vendorData.email, vendorData.password, function (err, vendor) {
-    //saves user id to session
-    req.login(vendor);
+  	//if authenticate doesn't pass, throw error
+  	if (err) {
+  		res.status(500).send(err);
+  	} else {
+  		//saves user id to session
+  		req.login(vendor);
 
-    //resdirect to user profile
-    res.redirect('/profile');
+  		//resdirect to user profile
+  		res.redirect('/profile');
+  	}
   });
 });
 
