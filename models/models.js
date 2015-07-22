@@ -1,8 +1,16 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
 	bcrypt = require('bcrypt'),
-	salt = bcrypt.genSaltSync(10);
+	salt = bcrypt.genSaltSync(10), 
+  validate = require('mongoose-validator');
 
+  var validateEmail = function(email) {
+      var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      return re.test(email)
+  };
+
+
+//market schema for test data only
 var MarketSchema = new Schema ({
 	name: String,
 	location: String,
@@ -10,10 +18,24 @@ var MarketSchema = new Schema ({
 	hours: String
 })
 
-var	VendorSchema = new Schema ({
-	email: String,
-	passwordDigest: String
+var PostSchema = new Schema ({
+  body: String
 });
+
+//vendor schema
+var	VendorSchema = new Schema ({
+	email: {type: String, 
+          trim: true, 
+          unique: true, 
+          required: 'Please enter a valid email address', 
+          validate: [validateEmail, 'Please enter a valid email address'],
+          match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email address']
+        },
+	passwordDigest: String, 
+  posts: [PostSchema]
+});
+
+
 
 
 // create a new vendor with secure (hashed) password
@@ -66,9 +88,11 @@ VendorSchema.methods.checkPassword = function (password) {
 
 var Market = mongoose.model('Market', MarketSchema);
 var Vendor = mongoose.model('Vendor', VendorSchema);
+var Post = mongoose.model('Post', PostSchema);
 
 module.exports.Market = Market;
 module.exports.Vendor = Vendor;
+module.exports.Post = Post;
 
 
 

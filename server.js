@@ -67,7 +67,7 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/public/views/index.html');
 });
 
-//signup route with placeholder response
+//signup route 
 app.get('/signup', function (req,res) {
 	req.currentVendor(function (err, vendor) {
 		if (vendor) {

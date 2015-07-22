@@ -36,7 +36,7 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3">
-		    	<form role="form" method="post" action="/vendors">
+		    	<form role="form" id="signupForm" autocomplete="off" method="post" action="/vendors">
 		<!-- 	    			<div class="row">
 						<div class="col-xs-6 col-sm-6 col-md-6">
 							<div class="form-group">
@@ -52,8 +52,9 @@
 
 				<div class="row">
 				  <div class="col-xs-6 col-sm-6 col-md-6 col-xs-offset-3">
-				    <div class="form-group">
-				      <input type="email" name="vendor[email]" id="email" class="form-control input-sm" placeholder="Email Address">
+				    <div class="form-group cmxform" id="signupForm"  autocomplete="off">
+				    	  <label for="email"> Email <small>(required, won't be published)</small></label>
+					      <input type="email" name="vendor[email]" id="email" class="form-control input-sm" placeholder="example@email.com" required>
 				    </div>
 				  </div>
 				</div>
@@ -61,14 +62,10 @@
 					<div class="row">
 						<div class="col-xs-6 col-sm-6 col-md-6 col-xs-offset-3">
 							<div class="form-group">
-								<input type="password" name="vendor[password]" id="password" class="form-control input-sm" placeholder="Password">
-							</div>
+								<label for="password">Password</label>
+								<input type="password" name="vendor[password]" id="password" class="form-control input-sm" minlength="6"placeholder="Password" required>
+							</div>	
 						</div>
-<!-- 						<div class="col-xs-6 col-sm-6 col-md-6">
-							<div class="form-group">
-								<input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
-							</div>
-						</div> -->
 					</div>
 		<!--     		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->    		  
 					  <button type="submit" class="btn btn-success bnt-lg pull-right">Sign Me Up</button>
@@ -83,13 +80,16 @@
 
 	<!-- jquery cdn -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- jquery validation plugin -->
+	<script src="js/jquery.validate.js"></script>
 	<!-- underscore cdn -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<!-- customized script -->
+	<!-- customized javascript -->
 	<script type="text/javascript" src="./scripts/scripts.js"></script>
-	
+	<!-- call validation plugin -->
+	<script> $("#signupForm").validate();</script>
 </body>
 </html>
 
