@@ -69,3 +69,7 @@ var Vendor = mongoose.model('Vendor', VendorSchema);
 
 module.exports.Market = Market;
 module.exports.Vendor = Vendor;
+
+
+
+

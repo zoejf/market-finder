@@ -25,7 +25,7 @@ $(function() {
     var searchZip = function (zip) {
         $.ajax({
             type: 'GET', 
-            url: '//search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=' + zip, 
+            url: 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=' + zip, 
             async: false,
             success: function (data) {
                 // console.log('data: ', data);
@@ -57,7 +57,7 @@ $(function() {
              if (id) {
                 $.ajax({
                     type: 'GET',
-                    url: '//search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=' + id,
+                    url: 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=' + id,
                     async: false,
                     success: function (data) {
                        console.log('id data: ', data);
