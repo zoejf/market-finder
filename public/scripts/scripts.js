@@ -28,6 +28,7 @@ $(function() {
             url: 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=' + zip, 
             async: false,
             datatype: 'jsonp', 
+            crossdomain: true,
             success: function (data) {
                 // console.log('data: ', data);
                 //push each of the found results to my temp marketResults array
@@ -61,6 +62,7 @@ $(function() {
                     url: 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=' + id,
                     async: false,
                     datatype: 'jsonp', 
+                    crossdomain: true,
                     success: function (data) {
                        console.log('id data: ', data);
                        console.log('market result inside success', marketResult);
