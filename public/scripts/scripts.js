@@ -7,7 +7,7 @@ $(function() {
     var $resultsList = $('#results-list');
     var $detailsPanel = $('#market-details');
 
-    // var marketResults = [];
+    var marketResultsArray = [];
     
     //results list: render test data to the page
     // $.get('/api/markets', function(data) {
@@ -81,39 +81,88 @@ $(function() {
     var appendResult = function (marketResult) {
         var $resultItem = $(resultsTemplate(marketResult));
           $resultsList.append($resultItem);
+
+        //set geocode address to equal address from marketResult
+        var address = marketResult.address;
+        console.log('market Result address', address);
+
+        geocoder.query(address, showMap);
+
+    
+
+        //store each market result in my temp results array
+        marketResultsArray.push($resultItem);
     };
 
 //DEFINE FUNCTIONS FOR MAP API
-
-
 function showMap(err, data) {
-    // The geocoder can return an area, like a city, or a
-    // point, like an address. Here we handle both cases,
-    // by fitting the map bounds to an area or zooming to a point.
     if (data.lbounds) {
         map.fitBounds(data.lbounds);
+        var marker = L.marker([data.latlng[0], data.latlng[1]]).addTo(map);
     } else if (data.latlng) {
-        map.setView([data.latlng[10], data.latlng[20]], 30);
+        map.setView([data.latlng[0], data.latlng[1]], 13);
     }
 }
+
+
+  //show marker on map
+  // var showMarker = function(lng, lat) {
+  //   L.mapbox.featureLayer({
+  //     type: 'Feature',
+  //     geometry: {
+  //       type: 'Point',
+  //       coordinates: [
+  //         lng,
+  //         lat
+  //       ]
+  //     },
+  //     properties: {
+  //       // description: '@' + tweet.user.screen_name + ': ' + tweet.text,
+  //       'marker-size': 'small',
+  //       'marker-color': '#32AD32',
+  //       'marker-symbol': 'star'
+  //     }
+  //   }).addTo(map);
+  // };
 
 
 
 
 // ! end of defining functions
 
+//set up map on page load
+L.mapbox.accessToken = 'pk.eyJ1Ijoiem9lamYiLCJhIjoiYzZkYzk3YTg0NjlhMWMzN2YxMzE3MjRlYjdhYTY2NTcifQ.4o17DQScL_qZlKTOYSXrXQ';
+// Set up map in the div #map
+var map = L.mapbox.map('map', 'zoejf.d3e46a92');
+
+
+
+//set variables
+var geocoder = L.mapbox.geocoder('mapbox.places-v1');
 
     //on click of the 'Go' button
     $('#search-zip').on('submit', function(event) {
         event.preventDefault();
 
+        marketResultsArray = [];
+
         var zip = $('#zipcode').val();
         console.log('zipcode: ', zip);
-        geocoder.query((zip.toString()), showMap);
+
+        //zoom map to show the zip code that was entered
+        // geocoder.query((zip.toString()), showMap);
+       
 
         //search by specific zip entered in form
         //inside this function, it searches again by each id and appends to page
         searchZip(zip);
+
+        console.log('marketResultsArray after append: ', marketResultsArray);
+
+       
+    
+
+
 
         //make map fit to markers
         // featureLayer.on('ready', function() {
@@ -156,3 +205,4 @@ function showMap(err, data) {
 
 
 });
+
