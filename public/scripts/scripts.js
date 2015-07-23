@@ -83,19 +83,20 @@ $(function() {
         //set geocode address to equal address from marketResult
         var address = marketResult.address;
 
+        if (address) {
+            geocoder.query(address, function(err, result) {
+                console.log('result.latlng[1]: ', result.latlng[1], '  result.latlng[0]: ', result.latlng[0]);
+                 if (err) {
+                   console.log(err);
+                 }
+                 else {
+                   showMarker(address, result.latlng[1], result.latlng[0]);
+                 }
+               });
 
-        geocoder.query(address, function(err, result) {
-            console.log('result.latlng[1]: ', result.latlng[1], '  result.latlng[0]: ', result.latlng[0]);
-             if (err) {
-               console.log(err);
-             }
-             else {
-               showMarker(address, result.latlng[1], result.latlng[0]);
-             }
-           });
-
-        //store each market result in my temp results array
-        marketResultsArray.push(marketResult);
+            //store each market result in my temp results array
+            marketResultsArray.push(marketResult);
+        }
     };
 
 
@@ -139,6 +140,7 @@ $(function() {
         event.preventDefault();
 
         $resultsList.empty();
+        // map.removeLayer(featureLayer);
 
         var zip = $('#zipcode').val();
         console.log('zipcode: ', zip);

@@ -38,10 +38,10 @@
 			  <div class="panel-body" >
 			 		<h5>Welcome!</h5>
 			 		<p>To Market allows you to find information about the closest farmer's markets near you. </p>
-	 			<form id="search-zip" class="form-inline">
+	 			<form role="form" id="search-zip" class="form-inline">
 	 				<div class="form-group">
 	 					<!-- <label for="zipcode"></label> -->
-	 					<input input class="form-control" id="zipcode" placeholder="Zip Code (ie. 94118)" autofocus> 
+	 					<input input class="form-control" id="zipcode" placeholder="Zip Code (ie. 94118)" minLength="5" required autofocus> 
 	 				</div>
 	 				<button type="submit" class="btn btn-success">Go!</button>
 	 			</form>
@@ -118,11 +118,15 @@
 
 	<!-- jquery cdn -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- jquery validation plugin -->
+	<script src="js/jquery.validate.js"></script>
 	<!-- underscore cdn -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<!-- customized script -->
 	<script type="text/javascript" src="./scripts/scripts.js"></script>
+	<!-- call validation plugin -->
+	<script> $("#signupForm").validate();</script>
 </body>
 </html>
