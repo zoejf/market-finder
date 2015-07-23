@@ -82,6 +82,7 @@ $(function() {
 
         //set geocode address to equal address from marketResult
         var address = marketResult.address;
+        var name = marketResult.marketname;
 
         if (address) {
             geocoder.query(address, function(err, result) {
@@ -90,7 +91,7 @@ $(function() {
                    console.log(err);
                  }
                  else {
-                   showMarker(address, result.latlng[1], result.latlng[0]);
+                   showMarker(address, name, result.latlng[1], result.latlng[0]);
                  }
                });
 
@@ -101,7 +102,7 @@ $(function() {
 
 
     //adds marker to the page based on geocoder lng and lat
-    var showMarker = function(address, lng, lat) {
+    var showMarker = function(address, name, lng, lat) {
       L.mapbox.featureLayer({
         type: 'Feature',
         geometry: {
@@ -112,7 +113,7 @@ $(function() {
           ]
         },
         properties: {
-          description: address,
+          description: name + " at " + address,
           'marker-size': 'small',
           'marker-color': '#19B919',
           'marker-symbol': 'embassy'

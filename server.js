@@ -15,6 +15,9 @@ var express = require('express'),
 // serve js and css files from public folder
 app.use(express.static(__dirname + '/public'));
 
+// connect to models instead of User = require('./models/user.js')
+var db = require('./models/models');
+
 
 
 //MIDDLEWARE
@@ -55,10 +58,8 @@ app.use(express.static(__dirname + '/public'));
 //end of middleware
 
 
- // connect to models instead of User = require('./models/user.js')
- var db = require('./models/models');
 
-//STATIC ROUTES
+// ROUTES
 // root route to get to main page
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/public/views/index.html');
@@ -98,6 +99,7 @@ app.get('/profile', function (req, res) {
   	}
   });
 });
+
 
 // vendor submits the signup form
 app.post('/vendors', function (req, res) {
