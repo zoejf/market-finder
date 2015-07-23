@@ -4,7 +4,6 @@ var express = require('express'),
     bodyParser = require('body-parser')
     mongoose = require("mongoose"),
 	_ = require("underscore"),
-	config = process.env || require ('./config'),
 	session = require('express-session');
 
 	mongoose.connect(
@@ -175,7 +174,5 @@ app.get('/logout', function (req, res) {
 // })
 
 // listen on port 3000
-app.listen(process.env.PORT || require('./config').PORT, function () {
-	console.log("server started on localhost:3000")
-});
+app.listen(process.env.PORT || 3000);
 
