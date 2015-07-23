@@ -89,9 +89,10 @@
 
 	<!-- template for results -->
 	<script type="text/template" id="results-template">
-		<li class="list-group-item market" id="market-<%= id %>" data-id="<%= id %>">	<strong><%= marketname %></strong>  &nbsp &nbsp
-		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-		Schedule: <%= schedule %>
+		<li class="list-group-item market" id="market-<%= id %>" data-id="<%= id %>">	Miles Away - Market Name: <br> <strong><%= marketname %></strong>  
+			<br>
+			Schedule: <%= schedule %>
+			Proucts: <%= products %>
 		<a href="<%= google %>">See it on Google Maps</a> 
 		<br>
 		</li>
@@ -111,7 +112,6 @@
 			  	<p> Schedule: <%= schedule %>
 			  	<br>
 			  	<p> Proucts: <%= products %>
-
 			</address>
 
 		</div>
