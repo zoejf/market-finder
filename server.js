@@ -15,6 +15,8 @@ var express = require('express'),
 // serve js and css files from public folder
 app.use(express.static(__dirname + '/public'));
 
+
+
 //MIDDLEWARE
 	// tell app to use bodyParser middleware
 	app.use(bodyParser.urlencoded({extended: true}));
@@ -52,11 +54,6 @@ app.use(express.static(__dirname + '/public'));
 	});
 //end of middleware
 
-
-  var markets = [
-    	{_id: "55aae016d0f5a164a679f617", name: "Inner Richmond", address: "Clement St", day: "Sunday", hours: "7am - 2pm", Products: "veggies, meat, eggs, cheese", numVendors: 70}, 
-    	{_id: "55aae058d0f5a164a679f618", name: "Ferry Building", address: "Embarcadero", day: "Wednesday", hours: "12pm - 4pm", Products: "veggies, fruit, bread, cheese", numVendors: 30} 
-    ];
 
  // connect to models instead of User = require('./models/user.js')
  var db = require('./models/models');
@@ -148,31 +145,31 @@ app.get('/logout', function (req, res) {
   res.redirect('/');
 });
 
-//API ROUTES
+//TEST DATA - MY API ROUTES
 
-app.get('/api/markets', function (req, res) {
-	db.Market.find(function (err, markets) {
-		if(err) {
-			console.log("error: ", err);
-			res.status(500).send(err);
-		} else {
-			// console.log(markets);
-			res.json(markets);
-		}
+// app.get('/api/markets', function (req, res) {
+// 	db.Market.find(function (err, markets) {
+// 		if(err) {
+// 			console.log("error: ", err);
+// 			res.status(500).send(err);
+// 		} else {
+// 			// console.log(markets);
+// 			res.json(markets);
+// 		}
 		
-	});
-})
+// 	});
+// })
 
-app.put('/api/markets/:marketId', function (req, res) {
-	//set the value of the id from the request
-	var targetId = req.params.marketId;
-	// console.log('targetId: ' + targetId);
-	//find item in markets array matching the id
-	var foundMarket = _.findWhere(markets, {_id: targetId});
-	// console.log('foundMarket: ' + foundMarket);
+// app.put('/api/markets/:marketId', function (req, res) {
+// 	//set the value of the id from the request
+// 	var targetId = req.params.marketId;
+// 	// console.log('targetId: ' + targetId);
+// 	//find item in markets array matching the id
+// 	var foundMarket = _.findWhere(markets, {_id: targetId});
+// 	// console.log('foundMarket: ' + foundMarket);
 
-	res.json(foundMarket);
-})
+// 	res.json(foundMarket);
+// })
 
 // listen on port 3000
 app.listen(process.env.PORT || 3000);
