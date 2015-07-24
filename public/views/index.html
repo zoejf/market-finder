@@ -26,35 +26,33 @@
 				<p>find a farmer's market anywhere</p>
 			</div>
 			<div class="col-sm-3">
+				<div class="panel panel-default info-panel">
+				  <div class="panel-body" >
+				 	<p style="color:black">Find a market</p>
+		 			<form role="form" id="search-zip" class="form-inline">
+		 				<div class="form-group">
+		 					<!-- <label for="zipcode"></label> -->
+		 					<input input class="form-control" id="zipcode" placeholder="Zip Code (ie. 94118)" minLength="5" required autofocus> 
+		 				</div>
+		 				<button type="submit" class="btn btn-success" pull-left>Go!</button>
+		 			</form>
+				  </div>
+				</div>
 				<p><a class="btn btn-success btn-sm" href="/signup" type="button">Are You A Vendor?</a></p>
 			</div>
 		</div>
 	</div>
+<!-- end of jumbotron -->
 </div>
-
 
 
 <div class="container">
   <div id="results-section">
 	<div class="row">
 		<div class="col-md-4">
-			<div class="panel panel-default info-panel">
-			  <div class="panel-body" >
-			 		<h5>Welcome!</h5>
-			 		<p>To Market allows you to find information about the closest farmer's markets near you. </p>
-	 			<form role="form" id="search-zip" class="form-inline">
-	 				<div class="form-group">
-	 					<!-- <label for="zipcode"></label> -->
-	 					<input input class="form-control" id="zipcode" placeholder="Zip Code (ie. 94118)" minLength="5" required autofocus> 
-	 				</div>
-	 				<button type="submit" class="btn btn-success">Go!</button>
-	 			</form>
-
-			  </div>
-			</div>
-			<div class="market-details">
-				<!-- 	specific market details go here -->
-			</div>
+			<!-- <div class="market-details">
+					specific market details go here - works with internal API only
+			</div> -->
 		</div>
 		<div class="col-md-8">
 			<div id='map'>
@@ -89,10 +87,11 @@
 
 	<!-- template for results -->
 	<script type="text/template" id="results-template">
-		<li class="list-group-item market" id="market-<%= id %>" data-id="<%= id %>">	Miles Away - Market Name: <br> <strong><%= marketname %></strong>  
+		<li class="list-group-item market" id="market-<%= id %>" data-id="<%= id %>"><strong><%= marketname %></strong>  
 			<br>
-			Schedule: <%= schedule %>
-			Proucts: <%= products %>
+			<%= address %> <br>
+			<%= schedule %> <br>
+			<%= products %>
 		<a href="<%= google %>">See it on Google Maps</a> 
 		<br>
 		</li>
