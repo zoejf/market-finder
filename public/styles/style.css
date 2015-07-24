@@ -8,6 +8,10 @@ body {
 	font-family: 'Courgette', cursive;
 }
 
+.display {
+	display: none;
+}
+
 .jumbotron h1 {
 	color: white;	
 }

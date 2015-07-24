@@ -140,8 +140,11 @@ $(function() {
     $('#search-zip').on('submit', function(event) {
         event.preventDefault();
 
+        //empty results from previous searches
         $resultsList.empty();
-        // map.removeLayer(featureLayer);
+
+        //make welcome box disappear
+        $('.welcome').addClass('display');
 
         var zip = $('#zipcode').val();
         console.log('zipcode: ', zip);
