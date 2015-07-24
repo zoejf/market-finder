@@ -2,10 +2,7 @@
 <html lang="en">
 <head>
 	<title>To Market</title>
-	<!-- favicon -->
-<!-- 	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
- -->	<link rel="icon" type="image/png" href="http://imgur.com/dff9Fhz"/>
-
+	
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<!-- Optional theme -->
@@ -13,6 +10,9 @@
 	<!-- mapbox css styling and js	 -->
 	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
 	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
+<!-- 	google fonts	 -->
+	<link href='http://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
 	<!-- customized styles -->
 		<link rel="stylesheet" type="text/css" href="./styles/style.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,23 +22,23 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-9">
-				<h1>To Market</h1>
+				<h1 class="courgette">To Market</h1>
 				<p>find a farmer's market anywhere</p>
 			</div>
 			<div class="col-sm-3">
 				<div class="panel panel-default info-panel">
 				  <div class="panel-body" >
-				 	<p style="color:black">Find a market</p>
+				 	<p id="find">Find a Market</p>
 		 			<form role="form" id="search-zip" class="form-inline">
 		 				<div class="form-group">
 		 					<!-- <label for="zipcode"></label> -->
 		 					<input input class="form-control" id="zipcode" placeholder="Zip Code (ie. 94118)" minLength="5" required autofocus> 
 		 				</div>
-		 				<button type="submit" class="btn btn-success" pull-left>Go!</button>
+		 				<button type="submit" class="btn btn-success courgette" pull-right>Go!</button>
 		 			</form>
 				  </div>
 				</div>
-				<p><a class="btn btn-success btn-sm" href="/signup" type="button">Are You A Vendor?</a></p>
+				<p><a class="btn btn-success btn-sm courgette" href="/signup" type="button">Are You A Vendor?</a></p>
 			</div>
 		</div>
 	</div>
@@ -48,8 +48,12 @@
 
 <div class="container">
   <div id="results-section">
-	<div class="row">
-		<div class="col-md-4">
+	<div class="row" id="results-row">
+		<div class="col-md-4" id="scroll">
+			<ul class="list-group" id="results-list">
+			 <!--  results list of markets goes here -->
+			</ul>
+
 			<!-- <div class="market-details">
 					specific market details go here - works with internal API only
 			</div> -->
@@ -59,27 +63,21 @@
 				<!-- map will go here -->
 			</div>	
 		</div>
-	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
-			<br>
-			<br>
-			<ul class="list-group" id="results-list">
-			 <!--  results list of markets goes here -->
-			</ul>
-		</div>
 	</div>
-	</div>
-
-	
-
-
 
   <!-- end of results-section -->	
   </div>
 	
-<footer>
-<p>This product uses USDA’s National Farmers Market API but is not endorsed or certified by USDA.</p>
-</footer>
+
+
+	<footer>
+	<br>
+	<br>
+	<p class="courgette"><strong>To Market &#169 Zoe J. Foss 2015</strong></p>
+	<p>This product uses USDA’s National Farmers Market API but is not endorsed or certified by USDA.</p>
+
+
+	</footer>
 <!-- end of container -->
 </div>
 
@@ -87,17 +85,19 @@
 
 	<!-- template for results -->
 	<script type="text/template" id="results-template">
-		<li class="list-group-item market" id="market-<%= id %>" data-id="<%= id %>"><strong><%= marketname %></strong>  
+		<li class="list-group-item market" id="market-<%= id %>" data-id="<%= id %>">
+			<span style="font-weight:700"><%= marketname %></span>
 			<br>
-			<%= address %> <br>
-			<%= schedule %> <br>
+			Get directions: <a href="<%= google %>" target="_blank"><%= address %></a><br>
+			<%= schedule %> 
+			<br>
 			<%= products %>
-		<a href="<%= google %>">See it on Google Maps</a> 
 		<br>
 		</li>
 		
 	</script>
 
+	<!-- only works with internal api -->
 	<!-- template for market details -->
 	<script type="text/template" id="market-details-template">
 	<div class="panel panel-default info-panel market-details">

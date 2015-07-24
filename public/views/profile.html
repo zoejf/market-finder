@@ -6,6 +6,9 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<!-- 	google fonts	 -->
+	<link href='http://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 	<!-- customized styles -->
 		<link rel="stylesheet" type="text/css" href="./styles/style.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +18,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-9">
-					<a href="/"><h1>To Market</h1></a>
+					<a href="/"><h1 class="courgette">To Market</h1></a>
 					<p>find a farmer's market anywhere</p>
 				</div>
 				<div class="col-sm-3">
@@ -28,17 +31,33 @@
 			<div class="col-sm-8 col-sm-offset-2">
 				<div class="panel panel-default info-panel">
 				  <div class="panel-body" >
-				  	<h3>Welcome, <span class="vendor-name"> Zoe</span></h3>
+				  	<!-- when templating works, 'vendor-name' will fill with a custom greeting -->
+				  	<h3 class="courgette">Welcome, <span class="vendor-name"> Zoe</span></h3>
 				  	<br>
 				  	<br>
-				  	....profile information here....
+				  	Your Home Market: 
+				  	<br>
+				  	Your Products: 
+				  	<br>
+				  	Your Posts:
 				  	<br>
 				  	<br>
-				  	<a class="btn btn-info btn-sm" href="/logout" type="button">Log Out</a>
+				  	<a class="btn btn-info btn-sm courgette" href="/logout" type="button">Log Out</a>
 				  </div>
 				</div>
 			</div>
 		</div>
+		
+		<footer>
+		<br>
+		<br>
+		<br>
+		<p class="courgette"><strong>To Market &#169 Zoe J. Foss 2015</strong></p>
+		<p>This product uses USDA’s National Farmers Market API but is not endorsed or certified by USDA.</p>
+
+		</footer>
+
+<!-- 	end of container	 -->
 	</div>
 
 

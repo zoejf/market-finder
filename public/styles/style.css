@@ -1,10 +1,22 @@
 body {
 	background-color: #fefbf7;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 400;
 }
+
+.courgette {
+	font-family: 'Courgette', cursive;
+}
+
 .jumbotron h1 {
 	color: white;	
 }
 
+
+#find {
+	text-align: center;
+	color: black;
+}
 .col-sm-3 {
 	vertical-align: bottom;
 }
@@ -18,11 +30,15 @@ body {
 
 footer {
 	text-align: center;
-	font-style: italic;
 }
 
-.col-md-8 {
-	height: 400px;
+#results-row {
+	height: 500px;
+}
+
+#scroll {
+	height: 100%;
+	overflow-y: scroll;
 }
 
 #map { 
@@ -32,4 +48,5 @@ footer {
 	width:100%; 
 	margin-left: auto;
 	margin-right: auto;
+	height: 500px;
 }
