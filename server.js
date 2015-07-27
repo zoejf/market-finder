@@ -147,6 +147,16 @@ app.get('/logout', function (req, res) {
   res.redirect('/');
 });
 
+app.get('/me', function (req, res) {
+	req.currentVendor(function (err, user) {
+		if(user) {
+			res.send(user);
+		} else {
+			res.send('no current user');
+		}
+	});
+});
+
 //TEST DATA - MY API ROUTES
 
 // app.get('/api/markets', function (req, res) {
