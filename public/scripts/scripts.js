@@ -1,6 +1,9 @@
 $(function() {
 
 //DEFINE ALL THE VARIABLES/SETUP
+    
+    //current user data
+    var globalUserData;
 
     //underscore function to compile both templates
     var resultsTemplate = _.template($('#results-template').html());
@@ -22,7 +25,15 @@ $(function() {
     //feature layer is where the markers will be plotted on the map
     var featureLayer = L.mapbox.featureLayer()
 
-    
+    $.get('/me', function (data) {
+      console.log('I ran');
+      if (data === 'no current user') {
+        $('#current-user-greet').html('Hello, guest!');
+      } else {
+        globalUserData = data;
+        $('#current-user-greet').html('Hello ' + globalUserData.email);
+      }
+    });
 
 //DEFINE FUNCTIONS FOR USDA and MAPBOX API 
     //get all results with that zip code 
