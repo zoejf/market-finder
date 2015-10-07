@@ -9,7 +9,6 @@ var mongoose = require('mongoose'),
       return re.test(email)
   };
 
-
 //market schema for test data only
 var MarketSchema = new Schema ({
 	name: String,
@@ -34,8 +33,6 @@ var	VendorSchema = new Schema ({
 	passwordDigest: String, 
   posts: [PostSchema]
 });
-
-
 
 
 // create a new vendor with secure (hashed) password

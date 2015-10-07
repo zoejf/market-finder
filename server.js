@@ -18,8 +18,6 @@ app.use(express.static(__dirname + '/public'));
 // connect to models instead of User = require('./models/user.js')
 var db = require('./models/models');
 
-
-
 //MIDDLEWARE
 	// tell app to use bodyParser middleware
 	app.use(bodyParser.urlencoded({extended: true}));

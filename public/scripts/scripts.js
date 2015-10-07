@@ -47,8 +47,8 @@ $(function() {
             crossdomain: true,
             success: function (data) {
                 var marketResults = data.results;
-
-                // console.log('market results in function: ', marketResults);
+                
+                console.log('market results in function: ', marketResults);
                 searchId(marketResults);
             }
         })
@@ -80,7 +80,11 @@ $(function() {
                        marketResult.google = data.marketdetails.GoogleLink;
                        marketResult.products = data.marketdetails.Products;
                        marketResult.schedule = data.marketdetails.Schedule;
-                       // console.log('marketResults after new keys: ', marketResult);
+                       //get distance number out of market name 
+                       // console.log('marketResults: ', marketResults);
+                       marketResult.distance = marketResults[i].marketname.split(" ",1);
+
+                       console.log('marketResults after new keys: ', marketResult);
                        appendResult(marketResult);  
                     }
                 })
@@ -112,9 +116,10 @@ $(function() {
         }
     };
 
-
     //adds marker to the page based on geocoder lng and lat
     var showMarker = function(address, name, lng, lat) {
+      //if 
+      //default - adds green marker to the page
       L.mapbox.featureLayer({
         type: 'Feature',
         geometry: {
