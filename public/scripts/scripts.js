@@ -74,17 +74,16 @@ $(function() {
                     datatype: 'jsonp', 
                     crossdomain: true,
                     success: function (data) {
-                       console.log('id data: ', data);
+                       // console.log('id data: ', data);
                        // console.log('market result inside success', marketResult);
                        marketResult.address = data.marketdetails.Address;
                        marketResult.google = data.marketdetails.GoogleLink;
                        marketResult.products = data.marketdetails.Products;
-                       marketResult.schedule = data.marketdetails.Schedule;
+                       marketResult.schedule = (data.marketdetails.Schedule).replace(/<br>/g, "");
                        //get distance number out of market name 
-                       // console.log('marketResults: ', marketResults);
-                       marketResult.distance = marketResults[i].marketname.split(" ",1);
-
-                       console.log('marketResults after new keys: ', marketResult);
+                       marketResult.distance = parseFloat(marketResults[i].marketname.split(" ",1));
+                       console.log('marketResults: ', marketResults);
+                       // console.log('marketResult distance: ', marketResult.distance);
                        appendResult(marketResult);  
                     }
                 })
@@ -99,6 +98,7 @@ $(function() {
         //set geocode address to equal address from marketResult
         var address = marketResult.address;
         var name = marketResult.marketname;
+        var distance = marketResult.distance;
 
         if (address) {
             geocoder.query(address, function(err, result) {
@@ -107,7 +107,7 @@ $(function() {
                    console.log(err);
                  }
                  else {
-                   showMarker(address, name, result.latlng[1], result.latlng[0]);
+                   showMarker(address, name, distance, result.latlng[1], result.latlng[0]);
                  }
                });
 
@@ -117,25 +117,43 @@ $(function() {
     };
 
     //adds marker to the page based on geocoder lng and lat
-    var showMarker = function(address, name, lng, lat) {
-      //if 
-      //default - adds green marker to the page
-      L.mapbox.featureLayer({
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [
-            lng,
-            lat
-          ]
-        },
-        properties: {
-          description: name + " at " + address,
-          'marker-size': 'small',
-          'marker-color': '#19B919',
-          'marker-symbol': 'embassy'
-        }
-      }).addTo(map);
+    var showMarker = function(address, name, distance, lng, lat) {
+      if (distance <= 1.0) {
+        L.mapbox.featureLayer({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [
+              lng,
+              lat
+            ]
+          },
+          properties: {
+            description: name + " at " + address,
+            'marker-size': 'small',
+            'marker-color': '#19B919',
+            'marker-symbol': 'embassy'
+          }
+        }).addTo(map);
+      } else {
+        //markets over 1 mile away - adds orange marker to the page
+        L.mapbox.featureLayer({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [
+              lng,
+              lat
+            ]
+          },
+          properties: {
+            description: name + " at " + address,
+            'marker-size': 'small',
+            'marker-color': '#f5c272',
+            'marker-symbol': 'embassy'
+          }
+        }).addTo(map);
+      }
     };
 
     //zooms map to the a certain place -- works with geocoder function 
